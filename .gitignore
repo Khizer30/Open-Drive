@@ -1,0 +1,12 @@
+# Node
+node_modules
+
+# Sveltekit
+build
+.svelte-kit
+
+# Env
+.env
+
+# Extras
+Extras

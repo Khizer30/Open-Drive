@@ -62,8 +62,7 @@
 
 <svelte:head>
   <title> Open Drive </title>
-
-  <meta name="description" content="Open Drive is a free, easy-to-use, accessible to all, cloud drive for storing small files such as PDFs, Images & PowerPoint Slides. Select a Locker No. & Open It Up!" />
+  
   <meta name="keywords" content="Open Drive, Home" />
 </svelte:head>
 

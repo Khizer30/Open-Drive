@@ -22,6 +22,12 @@
   }
 </script>
 
+<svelte:head>
+  <title> Upload | Open Drive </title>
+
+  <meta name="keywords" content="Open Drive, Upload" />
+</svelte:head>
+
 <div class="container-fluid d-flex flex-column justify-content-center align-items-center lockerContainer">
   <h1 class="lockerH"> UPLOAD FILE </h1>
   <form method="post" target="_self" enctype="multipart/form-data" autocomplete="off" class="d-flex flex-column justify-content-center align-items-center w-100">

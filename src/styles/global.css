@@ -1,9 +1,58 @@
-.svelteDiv
+/* Default */
+p 
 {
-  display: contents ;
+  margin: 0 ;
+  cursor: default ;
 }
 
-h1
+h1 
 {
-  font-family: sans-serif ;
+  margin: 0 ;
+  cursor: default ;
+}
+
+span 
+{
+  margin: 0 ;
+  cursor: default ;
+}
+
+h6 
+{
+  margin: 0 ;
+  cursor: default ;
+}
+
+body 
+{
+  background: #DBDBDB ;
+}
+
+.marginTB 
+{
+  margin: 1.5rem 0rem ;
+}
+
+.pad0 
+{
+  padding: 0 ;
+}
+
+.w-45 
+{
+  width: 45% !important ;
+}
+
+/* Footer */
+footer 
+{
+  min-height: 10vh ;
+}
+
+.footerSpan 
+{
+  color: #4E4C4E ;
+  font-family: "Bebas Neue", serif ;
+  font-size: 0.85em ;
+  text-align: center ;
 }

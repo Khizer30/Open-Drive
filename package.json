@@ -1,7 +1,7 @@
 {
 	"name": "open-drive",
 	"version": "1.0.0",
-  "type": "module",
+	"type": "module",
 	"private": false,
 	"scripts": 
   {
@@ -11,6 +11,10 @@
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"test:unit": "vitest"
+	},
+  "dependencies": 
+  {
+		"@fontsource/bebas-neue": "^4.5.9"
 	},
 	"devDependencies": 
   {

@@ -1,7 +1,15 @@
 <script lang="ts">
-  import "../styles/global.css" ;
+  import { page } from "$app/stores" ;
+  import "@fontsource/bebas-neue" ;
+  // ...
+  import Transition from "components/Transition.svelte" ;
+  import "styles/global.css" ;
 </script>
 
-<h1> Hell </h1>
+<Transition url={ $page.url }>
+  <slot />
+</Transition>
 
-<slot></slot>
+<footer class="d-flex justify-content-center align-items-center">
+  <span class="footerSpan"> BY SYED MUHAMMAD KHIZER </span>
+</footer>

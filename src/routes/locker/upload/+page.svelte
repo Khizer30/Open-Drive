@@ -42,7 +42,7 @@
       <span class="lockerSpan"> <br /> </span>
     { /if }
 
-    <input type="file" bind:files={ files } bind:this={ fileInput } accept=".pdf, .pptx, .docx, .jpeg, .jpg, .png, .webp, .rar" class="form-control d-none" />
+    <input type="file" bind:files={ files } bind:this={ fileInput } accept=".pdf, .pptx, .docx, .jpeg, .jpg, .png, .webp, .rar" required class="form-control d-none" />
     <button type="button" on:click={ () => openFileInput() } class="uploadBtn"> SELECT A FILE </button>
 
     <button type="button" class="lockerBtn"> UPLOAD </button>

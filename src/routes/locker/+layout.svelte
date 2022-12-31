@@ -15,13 +15,13 @@
     />
     <div id="navCol" class="collapse navbar-collapse">
       <ul class="navbar-nav ms-auto">
-        <li class="nav-item">
+        <li class="nav-item d-flex justify-content-center align-items-center">
           <a href="/locker/upload" class="nav-link navLink"> UPLOAD </a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item d-flex justify-content-center align-items-center">
           <a href="/locker/download" class="nav-link navLink"> DOWNLOAD </a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item d-flex justify-content-center align-items-center">
           <button type="button" on:click={ () => goto("/") } class="nav-link navLink"> CLOSE LOCKER </button>
         </li>
       </ul>

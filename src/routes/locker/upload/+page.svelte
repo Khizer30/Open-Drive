@@ -83,9 +83,8 @@
   color: #DBDBDB ;
   background: #4E4C4E ;
   font-size: 1.5em ;
+  border: #4E4C4E 1px solid ;
   border-radius: 30px ;
-  border-width: 1.5px ;
-  border-style: solid ;
   margin: 0.5rem 0rem ;
 
   transition: all 200ms ease-in ;
@@ -120,9 +119,8 @@
   color: #4E4C4E ;
   background: #DBDBDB ;
   font-size: 1.5em ;
+  border: #4E4C4E 1px solid ;
   border-radius: 30px ;
-  border-width: 1.5px ;
-  border-style: solid ;
   margin: 0.5rem 0rem ;
 
   transition: all 200ms ease-in ;

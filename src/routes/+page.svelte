@@ -102,6 +102,7 @@
 {
   font-family: "Bebas Neue", serif ;
   text-align: center ;
+  color: #4E4C4E ;
 }
 
 .locker 
@@ -111,8 +112,7 @@
   font-size: 3.5em ;
   color: #4E4C4E ;
   background: #DBDBDB ;
-  border-width: 1px ;
-  border-style: solid ;
+  border: #4E4C4E 1px solid ;
   border-radius: 100px ;
   min-width: 1.5em ;
   max-width: 1.5em ;
@@ -140,8 +140,7 @@
   width: 150px ;
   color: #DBDBDB ;
   background: #4E4C4E ;
-  border-width: 1px ;
-  border-style: solid ;
+  border: #4E4C4E 1px solid ;
   border-radius: 100px ;
   font-family: "Bebas Neue", serif ;
   text-align: center ;

@@ -1,7 +1,8 @@
 <script lang="ts">
   import { goto } from "$app/navigation" ;
   // ...
-  import { locker } from "$lib/store" ;
+  import { fetchPost } from "$lib/library" ;
+  import type { Res } from "$lib/library" ;
   import logo from "images/logo.webp" ;
 
   let a: number = 0 ;
@@ -47,16 +48,19 @@
   }
 
   // Start
-  function start(): void
+  async function start()
   {
     let code: string = "" ;
     code += a ;
     code += b ;
     code += c ;
 
-    locker.set(code) ;
+    let res: Res = await fetchPost("/api/locker", { code: code }) ;
 
-    goto("/locker/upload") ;
+    if (res.redirect)
+    {
+      await goto("/locker", { replaceState: true }) ;
+    }
   }
 </script>
 
@@ -75,7 +79,7 @@
     class="img-fluid w-45" 
   />
 
-  <p class="mainP"> Open Drive is a free, easy-to-use, accessible to all, cloud drive for storing small files such as PDFs, Images &amp; PowerPoint Slides<br>Select a Locker No. &amp; Open It Up! </p>
+  <p class="mainP"> Open Drive is a free, easy-to-use, accessible to all, cloud drive for storing small files such as PDFs, Images &amp; PowerPoint Slides <br /> Select a Locker No. &amp; Open It Up! </p>
   
   <form method="post" target="_self" enctype="application/x-www-form-urlencoded" autocomplete="off" class="w-100">
 

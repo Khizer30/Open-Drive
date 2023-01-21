@@ -1,4 +1,8 @@
 <script lang="ts">
+  import { page } from "$app/stores" ;
+  // ...
+  import File from "components/File.svelte" ;
+
   let fileInput: HTMLInputElement | undefined = undefined ;
   let files: FileList | null | undefined = undefined ;
   let progress: number = 0 ;
@@ -23,31 +27,41 @@
 </script>
 
 <svelte:head>
-  <title> Upload | Open Drive </title>
+  <title> Locker | Open Drive </title>
 
-  <meta name="keywords" content="Open Drive, Upload" />
+  <meta name="keywords" content="Open Drive, Locker, Upload File, Download File" />
 </svelte:head>
 
-<div class="container-fluid d-flex flex-column justify-content-center align-items-center lockerContainer">
-  <h1 class="lockerH"> UPLOAD FILE </h1>
-  <form method="post" target="_self" enctype="multipart/form-data" autocomplete="off" class="d-flex flex-column justify-content-center align-items-center w-100">
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-6 d-flex flex-column justify-content-center align-items-center lockerContainer">
+      <h1 class="lockerH"> UPLOAD FILE </h1>
+      <form method="post" target="_self" enctype="multipart/form-data" autocomplete="off" class="d-flex flex-column justify-content-center align-items-center w-100">
 
-    <div class="progress progressBar">
-      <div style="width: { progress }%;" aria-valuenow={ 100 } aria-valuemin={ 0 } aria-valuemax={ 100 } class="progress-bar bg-dark progress-bar-striped progress-bar-animated"></div>
+        <div class="progress progressBar">
+          <div style="width: { progress }%;" aria-valuenow={ 100 } aria-valuemin={ 0 } aria-valuemax={ 100 } class="progress-bar bg-dark progress-bar-striped progress-bar-animated"></div>
+        </div>
+
+        { #if message }
+          <span class="lockerSpan"> { message } </span>
+        { :else }
+          <span class="lockerSpan"> <br /> </span>
+        { /if }
+
+        <input type="file" bind:files={ files } bind:this={ fileInput } accept=".pdf, .pptx, .docx, .jpeg, .jpg, .png, .webp, .rar" required class="form-control d-none" />
+        <button type="button" on:click={ openFileInput } class="uploadBtn"> SELECT A FILE </button>
+
+        <button type="button" class="lockerBtn"> UPLOAD </button>
+        
+      </form>
     </div>
-
-    { #if message }
-      <span class="lockerSpan"> { message } </span>
-    { :else }
-      <span class="lockerSpan"> <br /> </span>
-    { /if }
-
-    <input type="file" bind:files={ files } bind:this={ fileInput } accept=".pdf, .pptx, .docx, .jpeg, .jpg, .png, .webp, .rar" required class="form-control d-none" />
-    <button type="button" on:click={ () => openFileInput() } class="uploadBtn"> SELECT A FILE </button>
-
-    <button type="button" class="lockerBtn"> UPLOAD </button>
+    <div class="col-md-6 d-flex flex-column justify-content-center align-items-center lockerContainer">
+      <h1 class="lockerH"> DOWNLOAD File </h1>
     
-  </form>
+      <File name="Windows.iso" />
+
+    </div>
+  </div>
 </div>
 
 <style>

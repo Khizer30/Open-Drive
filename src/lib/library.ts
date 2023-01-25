@@ -1,5 +1,5 @@
 // Fetch POST
-async function fetchPost(url: string, data: object): Promise<Res>
+async function fetchPost(url: string, data?: object): Promise<Res>
 {
   const response: Response = await fetch(url, 
   {
@@ -12,7 +12,7 @@ async function fetchPost(url: string, data: object): Promise<Res>
     body: JSON.stringify(data)
   }) ;
 
-  let res: Res = await response.json() ;
+  const res: Res = await response.json() ;
 
   return res ;
 }
@@ -20,7 +20,7 @@ async function fetchPost(url: string, data: object): Promise<Res>
 // Locker Interface
 interface Locker
 {
-  code: string ;
+  locker: string ;
 }
 
 // Res Interface
@@ -29,6 +29,6 @@ interface Res
   redirect: boolean ;
 }
 
-// Export
+// Exports
 export { fetchPost } ;
 export type { Locker, Res } ;

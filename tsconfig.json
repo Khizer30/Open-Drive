@@ -12,9 +12,8 @@
 		"skipLibCheck": true,
 		"sourceMap": true,
     "baseUrl": ".",
-    "paths": 
+    "paths":
     {
-      "$lib": ["./src/lib"],
       "$lib/*": ["./src/lib/*"],
       "images/*": ["./src/images/*"],
       "components/*": ["./src/components/*"],

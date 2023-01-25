@@ -1,10 +1,10 @@
 import { redirect } from "@sveltejs/kit" ;
-import type { PageServerLoad, Actions } from "./$types" ;
+import type { PageServerLoad } from "./$types" ;
 
 // Redirect
-export const load: PageServerLoad = (async ({ cookies }) =>
+export const load: PageServerLoad = (async ({ locals }) =>
 {
-  if (cookies.get("locker"))
+  if (locals.locker)
   {
     throw redirect(302, "/locker") ;
   }
@@ -13,14 +13,3 @@ export const load: PageServerLoad = (async ({ cookies }) =>
     throw redirect(302, "/") ;
   }
 }) satisfies PageServerLoad ;
-
-// Close Locker
-export const actions: Actions =
-{
-  default: async ({ cookies }) =>
-  {
-    cookies.set("locker", "", { path: "/", expires: new Date(0) }) ;
-
-    throw redirect(302, "/") ;
-  }
-} ;

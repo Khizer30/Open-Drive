@@ -1,9 +1,20 @@
 <script lang="ts">
+  import { onMount } from "svelte" ;
   import { goto } from "$app/navigation" ;
+  import { page } from "$app/stores" ;
   // ...
   import { fetchPost } from "$lib/library" ;
   import type { Res } from "$lib/library" ;
   import logo from "images/logo.webp" ;
+
+  // Redirect
+  onMount(async () =>
+  {
+    if ($page.data.locker)
+    {
+      await goto("/locker", { replaceState: true }) ;
+    }
+  }) ;
 
   let a: number = 0 ;
   let b: number = 0 ;
@@ -48,14 +59,14 @@
   }
 
   // Start
-  async function start()
+  async function start(): Promise<void>
   {
     let code: string = "" ;
     code += a ;
     code += b ;
     code += c ;
 
-    let res: Res = await fetchPost("/api/locker", { code: code }) ;
+    const res: Res = await fetchPost("/api/locker", { locker: code }) ;
 
     if (res.redirect)
     {

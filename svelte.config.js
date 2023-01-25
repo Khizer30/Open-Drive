@@ -10,7 +10,6 @@ const config =
 		adapter: adapter(),
     alias:
     {
-      "$lib": "./src/lib",
       "$lib/*": "./src/lib/*",
       "images/*": "./src/images/*",
       "components/*": "./src/components/*",

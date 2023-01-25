@@ -1,7 +1,18 @@
 <script lang="ts">
+  import { onMount } from "svelte" ;
+  import { goto } from "$app/navigation" ;
   import { page } from "$app/stores" ;
   // ...
   import File from "components/File.svelte" ;
+
+  // Redirect
+  onMount(async () =>
+  {
+    if (!$page.data.locker)
+    {
+      await goto("/", { replaceState: true }) ;
+    }
+  }) ;
 
   let fileInput: HTMLInputElement | undefined = undefined ;
   let files: FileList | null | undefined = undefined ;
@@ -56,7 +67,7 @@
       </form>
     </div>
     <div class="col-md-6 d-flex flex-column justify-content-center align-items-center lockerContainer">
-      <h1 class="lockerH"> DOWNLOAD File </h1>
+      <h1 class="lockerH"> DOWNLOAD FILE </h1>
     
       <File name="Windows.iso" />
 

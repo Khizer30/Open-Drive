@@ -1,6 +1,20 @@
 <script lang="ts">
+  import { goto } from "$app/navigation" ;
   // ...
+  import { fetchPost } from "$lib/library" ;
+  import type { Res } from "$lib/library" ;
   import logo from "images/logo.webp" ;
+
+  // Close Locker
+  async function close(): Promise<void>
+  {
+    const res: Res = await fetchPost("/api/close") ;
+
+    if (res.redirect)
+    {
+      await goto("/", { replaceState: true }) ;
+    }
+  }
 </script>
 
 <nav class="navbar navbar-light navbar-expand navBar">
@@ -15,9 +29,7 @@
     <div id="navCol" class="collapse navbar-collapse">
       <ul class="navbar-nav ms-auto">
         <li class="nav-item d-flex justify-content-center align-items-center">
-          <form action="/api/close" method="post" target="_self" enctype="application/x-www-form-urlencoded" autocomplete="off">
-            <button type="submit" class="nav-link navLink"> CLOSE LOCKER </button>
-          </form>
+          <button type="button" on:click={ close } class="nav-link navLink"> CLOSE LOCKER </button>
         </li>
       </ul>
     </div>

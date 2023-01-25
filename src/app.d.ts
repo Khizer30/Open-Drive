@@ -1,10 +1,13 @@
 declare namespace App 
 {
 	// interface Error {}
-  // interface Locals {}
+  interface Locals 
+  {
+    locker?: string ;
+  }
 	interface PageData 
   {
-    code: string ;
+    locker?: string ;
   }
 	// interface Platform {}
 }

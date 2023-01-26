@@ -14,6 +14,7 @@ const config =
       "$lib/*": "src/lib/*",
       "images/*": "src/images/*",
       "components/*": "src/components/*",
+      "config/*": "src/config/*",
       "styles/*": "src/styles/*"
     }
 	}

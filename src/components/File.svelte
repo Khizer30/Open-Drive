@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { fly } from "svelte/transition" ;
   // ...
   import downloadImg from "images/download.svg" ;
   import deleteImg from "images/delete.svg" ;
@@ -6,7 +7,7 @@
   export let name: string = "" ;
 </script>
 
-<div class="d-flex justify-content-evenly align-items-center fileDiv">
+<div in:fly={{ x: 50, duration: 500 }} out:fly={{ x: -50, duration: 500 }} class="d-flex justify-content-evenly align-items-center fileDiv">
   <p class="fileP"> { name } </p>
   <div class="d-flex justify-content-evenly align-items-center">
     <button type="button" class="d-flex justify-content-center align-items-center fileBtn">
@@ -36,7 +37,7 @@
   width: 75% ;
   height: 55px ;
   background: #4E4C4E ;
-  border-style: none ;
+  border: none ;
   border-radius: 15px ;
   margin: 0.25rem 0rem ;
 }

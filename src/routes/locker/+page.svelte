@@ -2,7 +2,10 @@
   import { onMount } from "svelte" ;
   import { goto } from "$app/navigation" ;
   import { page } from "$app/stores" ;
+  import { ref, uploadBytesResumable, listAll } from "firebase/storage" ;
+  import type { StorageReference, UploadTask, UploadTaskSnapshot, StorageError, ListResult } from "firebase/storage" ;
   // ...
+  import { storage } from "config/firebase" ;
   import File from "components/File.svelte" ;
 
   // Redirect
@@ -12,16 +15,40 @@
     {
       await goto("/", { replaceState: true }) ;
     }
+    else
+    {
+      bucket = await readStorage() ;
+    }
   }) ;
 
+  // Read Storage
+  async function readStorage(): Promise<StorageReference[]>
+  {
+    const listRef: StorageReference = ref(storage, `${ $page.data.locker }/`) ;
+    const tempBucket: StorageReference[] = [] ;
+
+    await listAll(listRef)
+    .then((list: ListResult) =>
+    {
+      list.items.forEach((itemRef: StorageReference) =>
+      {
+        tempBucket.push(itemRef) ;
+      }) ;
+    }) ;
+
+    return tempBucket ;
+  }
+
+  let bucket: StorageReference[] = [] ;
   let fileInput: HTMLInputElement | undefined = undefined ;
   let files: FileList | null | undefined = undefined ;
   let progress: number = 0 ;
   let message: string = "" ;
+  let show: boolean = true ;
 
   $:
   {
-    if (files && files[0].name)
+    if (files && files[0])
     {
       message = files[0].name ;
     }
@@ -32,7 +59,45 @@
   {
     if (fileInput)
     {
+      // Reset
+      message = "" ;
+      progress = 0 ;
+
       fileInput.click() ;
+    }
+  }
+
+  // Upload
+  async function upload(): Promise<void>
+  {
+    if (files && files[0])
+    {
+      const storageRef: StorageReference = ref(storage, `${ $page.data.locker }/${ files[0].name }`) ;
+      const uploadTask: UploadTask = uploadBytesResumable(storageRef, files[0]) ;
+      show = false ;
+
+      uploadTask.on("state_changed", (snapshot: UploadTaskSnapshot) =>
+      {
+        progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100 ;
+      },
+      (error: StorageError) =>
+      {
+        message = error.code ;
+      },
+      async () =>
+      {
+        message = "UPLOAD COMPLETED" ;
+
+        // Reset
+        bucket = await readStorage() ;
+        files = undefined ;
+        show = true ;
+      }) ;
+    }
+    else
+    {
+      message = "NO FILE SELECTED" ;
+      progress = 0 ;
     }
   }
 </script>
@@ -60,16 +125,18 @@
         { /if }
 
         <input type="file" bind:files={ files } bind:this={ fileInput } accept=".pdf, .pptx, .docx, .jpeg, .jpg, .png, .webp, .rar" required class="form-control d-none" />
-        <button type="button" on:click={ openFileInput } class="uploadBtn"> SELECT A FILE </button>
+        <button type="button" on:click={ openFileInput } class="uploadBtn { show ? "" : "invisible" }"> SELECT A FILE </button>
 
-        <button type="button" class="lockerBtn"> UPLOAD </button>
-        
+        <button type="button" on:click={ upload } class="lockerBtn { show ? "" : "invisible" }"> UPLOAD </button>
+
       </form>
     </div>
     <div class="col-md-6 d-flex flex-column justify-content-center align-items-center lockerContainer">
       <h1 class="lockerH"> DOWNLOAD FILE </h1>
     
-      <File name="Windows.iso" />
+      { #each bucket as item }
+        <File name={ item.name } />
+      { /each }
 
     </div>
   </div>

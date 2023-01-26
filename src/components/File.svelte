@@ -7,9 +7,11 @@
   export let name: string = "" ;
 </script>
 
-<div in:fly={{ x: 50, duration: 500 }} out:fly={{ x: -50, duration: 500 }} class="d-flex justify-content-evenly align-items-center fileDiv">
-  <p class="fileP"> { name } </p>
-  <div class="d-flex justify-content-evenly align-items-center">
+<div in:fly={{ x: 50, duration: 500 }} out:fly={{ x: -50, duration: 500 }} class="d-flex justify-content-center align-items-center fileDiv">
+  <div class="col-7">
+    <p class="text-break fileP"> { name } </p>
+  </div>
+  <div class="col-5 d-flex justify-content-center align-items-center">
     <button type="button" class="d-flex justify-content-center align-items-center fileBtn">
       <img 
         src={ downloadImg }

@@ -1,18 +1,49 @@
 <script lang="ts">
   import { fly } from "svelte/transition" ;
+  import { getDownloadURL, deleteObject } from "firebase/storage" ;
+  import type { StorageReference } from "firebase/storage" ;
   // ...
+  import { fetchGet } from "$lib/library" ;
   import downloadImg from "images/download.svg" ;
   import deleteImg from "images/delete.svg" ;
 
-  export let name: string = "" ;
+  // Props
+  export let storageRef: StorageReference ;
+  export let render: () => Promise<void> ;
+
+  // Download
+  async function download(): Promise<void>
+  {
+    await getDownloadURL(storageRef)
+    .then(async (url: string) =>
+    {
+      const file: Blob = await fetchGet(url) ;
+
+      const a: HTMLAnchorElement = document.createElement("a") ;
+      a.href = window.URL.createObjectURL(file) ;
+      a.download = storageRef.name ;
+      a.click() ;
+      a.remove() ;
+    }) ;
+  }
+
+  // Remove
+  async function remove(): Promise<void>
+  {
+    await deleteObject(storageRef)
+    .then(() =>
+    {
+      render() ;
+    }) ;
+  }
 </script>
 
 <div in:fly={{ x: 50, duration: 500 }} out:fly={{ x: -50, duration: 500 }} class="d-flex justify-content-center align-items-center fileDiv">
   <div class="col-7">
-    <p class="text-break fileP"> { name } </p>
+    <p class="text-break fileP"> { storageRef.name } </p>
   </div>
   <div class="col-5 d-flex justify-content-center align-items-center">
-    <button type="button" class="d-flex justify-content-center align-items-center fileBtn">
+    <button type="button" on:click={ download } class="d-flex justify-content-center align-items-center fileBtn">
       <img 
         src={ downloadImg }
         alt="Download" 
@@ -21,7 +52,7 @@
         class="fileBtnImg" 
       />
     </button>
-    <button type="button" class="d-flex justify-content-center align-items-center fileBtn">
+    <button type="button" on:click={ remove } class="d-flex justify-content-center align-items-center fileBtn">
       <img 
         src={ deleteImg }
         alt="Delete" 
@@ -63,7 +94,7 @@
   max-height: 30px ;
   margin: 0rem 0.5rem ;
 
-  transition: all 200ms ease-in ;
+  transition: all 100ms ease-in ;
 }
 
 .fileBtn:hover

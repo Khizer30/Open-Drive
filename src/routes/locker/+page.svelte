@@ -100,10 +100,16 @@
       progress = 0 ;
     }
   }
+
+  // Render
+  async function render(): Promise<void>
+  {
+    bucket = await readStorage() ;
+  }
 </script>
 
 <svelte:head>
-  <title> Locker | Open Drive </title>
+  <title> Locker { $page.data.locker } | Open Drive </title>
 
   <meta name="keywords" content="Open Drive, Locker, Upload File, Download File" />
 </svelte:head>
@@ -135,7 +141,7 @@
       <h1 class="lockerH"> DOWNLOAD FILE </h1>
     
       { #each bucket as item }
-        <File name={ item.name } />
+        <File storageRef={ item } render={ render } />
       { /each }
 
     </div>

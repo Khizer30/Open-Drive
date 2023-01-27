@@ -17,6 +17,20 @@ async function fetchPost(url: string, data?: object): Promise<Res>
   return res ;
 }
 
+// Fetch GET
+async function fetchGet(url: string): Promise<Blob>
+{
+  const response: Response = await fetch(url, 
+  {
+    mode: "cors",
+    method: "GET"
+  }) ;
+
+  const res: Blob = await response.blob() ;
+
+  return res ;
+}
+
 // Locker Interface
 interface Locker
 {
@@ -30,5 +44,5 @@ interface Res
 }
 
 // Exports
-export { fetchPost } ;
+export { fetchPost, fetchGet } ;
 export type { Locker, Res } ;

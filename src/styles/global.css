@@ -56,3 +56,20 @@ footer
   font-size: 0.85em ;
   text-align: center ;
 }
+
+/* Error */
+.errorH1 
+{
+  color: #4E4C4E ;
+  font-size: 10em ;
+  font-family: "Bebas Neue", serif ;
+  text-align: center ;
+}
+
+.errorH2 
+{
+  font-family: "Bebas Neue", serif ;
+  text-align: center ;
+  font-size: 5em ;
+  color: #4E4C4E ;
+}
